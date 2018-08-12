@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const client = new Discord.Client();
 
-const settings = JSON.parse(fs.readFileSync("./settings/settings.json", "utf-8"));
+const settings = JSON.parse(fs.readFileSync("settings/settings.json", "utf-8"));
 const jokes = fs.readFileSync("./jokes.txt", "utf-8");
 const jokesList = jokes.split ("\n");
 
