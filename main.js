@@ -15,7 +15,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  if (msg.content.slice(0,2) === '==') {
+  if (msg.content.slice(0,2) === '==') {//math
     msg.reply(msg.content.slice(2) + " = " + botFunctions.basicMath(msg.content));
   }
 
@@ -26,7 +26,7 @@ client.on('message', msg => {
     msg.reply('boob');
   }
 
-  else if (msg.content === '!joke') {
+  else if (msg.content === '!joke') {//joke
     //random joke
     //msg.reply(jokesList[Math.floor(Math.random()*jokesList.length)]);
     //ur mom
