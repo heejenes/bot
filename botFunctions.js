@@ -1,5 +1,12 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 module.exports = {
+    /*jsonFix: function (data) {
+        for (let i = 0; i < data.length-1; i++) {
+            if (data.slice(i,1+1) === ', ') {
+
+            }
+        }
+    }*/
     basicMath: function (msg) {
         //determine where operators are
         var index = [];
