@@ -1,12 +1,21 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports = {
-    /*jsonFix: function (data) {
-        for (let i = 0; i < data.length-1; i++) {
-            if (data.slice(i,1+1) === ', ') {
+const request = require('request-promise');
+const fs = require('fs');
 
+module.exports = {
+
+    getThreads: function (options) {
+        request(options, function(err, res, body){
+            if (err) {
+            msg.reply('There was an error!');
             }
-        }
-    }*/
+            else {
+            fs.writeFileSync("./data.json", body);
+            console.log(`Got threads`);
+            }
+        })
+    },
+
     basicMath: function (msg) {
         //determine where operators are
         var index = [];
