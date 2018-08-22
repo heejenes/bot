@@ -4,16 +4,36 @@ const fs = require('fs');
 
 module.exports = {
 
-    getThreads: function (options) {
-        request(options, function(err, res, body){
+    callbackFuck: function (data, fuck) {
+        fuck(JSON.parse(data).data);
+    },
+
+    setUrl: function (options) {//if values in options change, update var url
+        return options.dirA + options.subreddit + '/' + options.sort + '.json?limit=' + options.size.toString();
+    },
+
+    getThreads: function (dir, callback) {
+        request(dir, function(err, res, body){
             if (err) {
-            msg.reply('There was an error!');
+                console.log(`There was an error!`);
             }
             else {
-            fs.writeFileSync("./data.json", body);
-            console.log(`Got threads`);
+                fs.writeFileSync("./data.json", body);
+                console.log(`Got threads`);
+                if (typeof callback === "function") {
+                    callback(1);
+                }
             }
         })
+    },
+
+    getNumOfSticky: function (data) {
+        for (var i = 0; i < data.children.length; i++) {
+            if (!data.children[i].data.stickied) { //go until non-stickied thread is found
+                console.log(`${i} sticky threads`);
+                return i;
+            }
+        }
     },
 
     basicMath: function (msg) {
