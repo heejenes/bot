@@ -4,6 +4,14 @@ const fs = require('fs');
 
 module.exports = {
 
+    getOptions: function () {
+        return JSON.parse(fs.readFileSync('./save.json', 'utf-8'));
+    },
+
+    saveOptions: function (options) {
+        fs.writeFileSync('./save.json', JSON.stringify(options, null, 2));
+    },
+
     callbackFuck: function (data, fuck) {
         fuck(JSON.parse(data).data);
     },

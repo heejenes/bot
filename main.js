@@ -9,12 +9,13 @@ const jokes = fs.readFileSync("./jokes.txt", "utf-8");
 const jokesList = jokes.split ("\n");
 
 //https://www.reddit.com/r/osugame/hot.json?limit=2
-var options = {
+var options = botFunctions.getOptions();
+/*var options = {
   dirA: 'https://www.reddit.com/r/',
   size: 10,
   subreddit: 'osugame',
   sort: 'hot'
-};
+};*/
 //"stickied": bool
 var dir = botFunctions.setUrl (options);
 var numOfThreads;
@@ -62,6 +63,7 @@ client.on('message', msg => {
 
         if (!isNaN(newSize) && newSize < 31 && newSize > 0) {//if it isn't NaN, set size
           options.size = newSize;
+          botFunctions.saveOptions(options);
           dir = botFunctions.setUrl(options);
           //options = dir + options.size.toString();
           msg.reply("Set size to " + options.size + " with " + numOfSticky + "sticky posts.");
@@ -78,6 +80,7 @@ client.on('message', msg => {
       //updating var dir
       let newSubreddit = msg.content.slice(5);
       options.subreddit = newSubreddit; //new value
+      botFunctions.saveOptions(options);
       dir = botFunctions.setUrl(options); //setting var dir
       //getting sub count from new subreddit
       botFunctions.getThreads(options.dirA + options.subreddit + '/about.json', a => {
@@ -97,7 +100,8 @@ client.on('message', msg => {
     }
     else if (msg.content.slice(0,5) === '`rso=') {
       let newSort = msg.content.slice(5);
-      options.sort = newSort;
+      botFunctions.options.sort = newSort;
+      botFunctions.saveOptions(options);
       dir = botFunctions.setUrl(options);
       msg.reply('Now getting ' + options.sort + ' in r/' + options.subreddit);
       botFunctions.getThreads(dir, a => {
