@@ -26,7 +26,7 @@ client.on('ready', () => {//on start
   console.log(`Logged in as ${client.user.tag}!`);
 
   botFunctions.getThreads(dir, a => {
-    botFunctions.callbackFuck(fs.readFileSync("./data.json","utf-8"), data => {
+    botFunctions.callbackF(fs.readFileSync("./data.json","utf-8"), data => {
       var threadData = data;
       numOfThreads = threadData.children.length;
       numOfSticky = botFunctions.getNumOfSticky(threadData);
@@ -84,14 +84,14 @@ client.on('message', msg => {
       dir = botFunctions.setUrl(options); //setting var dir
       //getting sub count from new subreddit
       botFunctions.getThreads(options.dirA + options.subreddit + '/about.json', a => {
-        botFunctions.callbackFuck(fs.readFileSync("./data.json","utf-8"), data => {
+        botFunctions.callbackF(fs.readFileSync("./data.json","utf-8"), data => {
           msg.reply('Now getting r/' + options.subreddit + ': ' + data.subscribers.toString() + ' subscribers');//sending data
         })
       });//getting json
       //threadData = JSON.parse(fs.readFileSync("./data.json","utf-8")).data.subscribers;//reading json
       //updating data.json with new subreddit
       botFunctions.getThreads(dir, a => {
-        botFunctions.callbackFuck(fs.readFileSync("./data.json","utf-8"), data => {
+        botFunctions.callbackF(fs.readFileSync("./data.json","utf-8"), data => {
           threadData = data;
           numOfThreads = threadData.children.length;//updating thread count
           numOfSticky = botFunctions.getNumOfSticky(threadData);//updating sticky thread count
@@ -105,7 +105,7 @@ client.on('message', msg => {
       dir = botFunctions.setUrl(options);
       msg.reply('Now getting ' + options.sort + ' in r/' + options.subreddit);
       botFunctions.getThreads(dir, a => {
-        botFunctions.callbackFuck(fs.readFileSync("./data.json","utf-8"), data => {
+        botFunctions.callbackF(fs.readFileSync("./data.json","utf-8"), data => {
           threadData = data;
           numOfThreads = threadData.children.length;//updating thread count
           numOfSticky = botFunctions.getNumOfSticky(threadData);//updating sticky thread count

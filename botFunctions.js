@@ -12,8 +12,8 @@ module.exports = {
         fs.writeFileSync('./save.json', JSON.stringify(options, null, 2));
     },
 
-    callbackFuck: function (data, fuck) {
-        fuck(JSON.parse(data).data);
+    callbackF: function (data, f) {
+        f(JSON.parse(data).data);
     },
 
     setUrl: function (options) {//if values in options change, update var url
